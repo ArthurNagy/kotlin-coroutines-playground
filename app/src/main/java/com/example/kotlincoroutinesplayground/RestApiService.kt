@@ -12,7 +12,7 @@ import java.io.File
 fun createImagePart(imageFile: File): MultipartBody.Part =
     MultipartBody.Part.createFormData("blurred_image", imageFile.name, RequestBody.create(MediaType.parse(".jpg"), imageFile))
 
-interface ImageUploadService {
+interface RestApiService {
 
     @Multipart
     @POST("/blurred_image")

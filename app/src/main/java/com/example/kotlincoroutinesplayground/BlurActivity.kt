@@ -17,17 +17,19 @@ class BlurActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BlurViewModel
     private lateinit var viewBinding: ActivityBlurBinding
+    private val coroutineLifecycle = CoroutineLifecycleObserver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_blur)
         viewModel = ViewModelProviders.of(this).get(BlurViewModel::class.java)
+        lifecycle.addObserver(coroutineLifecycle)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //...
         val imageUri = data!!.data!!
-        launch(UI) {
+        launch(context = UI, parent = coroutineLifecycle.job) {
             val resultImage = withContext(BACKGROUND) {
                 blurImage(imageUri)
             }
