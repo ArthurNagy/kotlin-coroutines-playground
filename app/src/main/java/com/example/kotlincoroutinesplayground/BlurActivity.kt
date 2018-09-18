@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.kotlincoroutinesplayground.databinding.ActivityBlurBinding
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.withContext
 import kotlin.coroutines.experimental.suspendCoroutine
@@ -24,12 +25,21 @@ class BlurActivity : AppCompatActivity() {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_blur)
         viewModel = ViewModelProviders.of(this).get(BlurViewModel::class.java)
         lifecycle.addObserver(coroutineLifecycle)
+
+        async { }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //...
         val imageUri = data!!.data!!
         launch(context = UI, parent = coroutineLifecycle.job) {
+
+            //            val blurImageDeferred = async(BACKGROUND) {
+//                blurImage(imageUri)
+//            }
+//
+//            val blurredImageResult = blurImageDeferred.await()
+
             val resultImage = withContext(BACKGROUND) {
                 blurImage(imageUri)
             }
