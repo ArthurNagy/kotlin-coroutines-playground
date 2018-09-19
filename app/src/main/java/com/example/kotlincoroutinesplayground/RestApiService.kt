@@ -16,7 +16,9 @@ interface RestApiService {
 
     @Multipart
     @POST("/blurred_image")
+//    fun uploadBlurredImage(@Part file: MultipartBody.Part): Single<BlurResponse>
     fun uploadBlurredImage(@Part file: MultipartBody.Part): Call<BlurResponse>
+
 
     class BlurResponse
 
