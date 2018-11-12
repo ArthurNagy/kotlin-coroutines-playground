@@ -1,4 +1,4 @@
-package com.example.kotlincoroutinesplayground
+package me.arthurnagy.news
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

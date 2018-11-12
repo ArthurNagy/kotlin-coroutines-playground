@@ -1,4 +1,4 @@
-package com.example.kotlincoroutinesplayground
+package me.arthurnagy.news
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.example.kotlincoroutinesplayground", appContext.packageName)
+        assertEquals("me.arthurnagy.news", appContext.packageName)
     }
 }
