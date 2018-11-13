@@ -2,9 +2,8 @@ package me.arthurnagy.news
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
-import me.arthurnagy.news.MainBinding
-import me.arthurnagy.news.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,4 +12,5 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<MainBinding>(this, R.layout.activity_main)
 //        WorkManager.getInstance().
     }
+
 }
