@@ -13,6 +13,8 @@ class ArticleRepository(
     private val articleDao: ArticleDao
 ) {
 
+    private var totalArticles = 0
+
     suspend fun getArticles(): Resource<List<Article>> {
         val localArticlesResource = withContextResource(dispatchers.io) {
             articleDao.getAll()
@@ -30,6 +32,7 @@ class ArticleRepository(
                 withContext(dispatchers.io) {
                     articleDao.insert(*remoteArticleResource.data.articles.toTypedArray())
                 }
+                totalArticles += remoteArticleResource.data.totalResults
                 Resource.Success(remoteArticleResource.data.articles)
             }
             is Resource.Error -> remoteArticleResource
