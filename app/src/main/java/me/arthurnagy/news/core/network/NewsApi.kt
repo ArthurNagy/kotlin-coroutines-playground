@@ -4,7 +4,7 @@ import kotlinx.coroutines.Deferred
 import me.arthurnagy.news.core.model.Category
 import me.arthurnagy.news.core.model.Country
 import me.arthurnagy.news.core.model.SortType
-import me.arthurnagy.news.core.model.Source
+import me.arthurnagy.news.core.data.source.Source
 import retrofit2.http.GET
 import retrofit2.http.Query
 

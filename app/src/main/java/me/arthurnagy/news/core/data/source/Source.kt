@@ -1,8 +1,8 @@
-package me.arthurnagy.news.core.model
+package me.arthurnagy.news.core.data.source
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import me.arthurnagy.news.core.model.Source.Companion.TABLE_NAME
+import me.arthurnagy.news.core.data.source.Source.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class Source(

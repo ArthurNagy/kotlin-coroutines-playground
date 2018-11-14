@@ -1,8 +1,8 @@
-package me.arthurnagy.news.core.storage
+package me.arthurnagy.news.core.data.source
 
 import androidx.room.Dao
 import androidx.room.Query
-import me.arthurnagy.news.core.model.Source
+import me.arthurnagy.news.core.data.db.NewsDao
 
 @Dao
 interface SourceDao : NewsDao<Source> {

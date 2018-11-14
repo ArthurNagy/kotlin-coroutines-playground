@@ -1,9 +1,10 @@
-package me.arthurnagy.news.core.model
+package me.arthurnagy.news.core.data.article
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import me.arthurnagy.news.core.model.Article.Companion.TABLE_NAME
+import me.arthurnagy.news.core.data.article.Article.Companion.TABLE_NAME
+import me.arthurnagy.news.core.data.source.Source
 
 @Entity(tableName = TABLE_NAME)
 data class Article(

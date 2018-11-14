@@ -1,4 +1,4 @@
-package me.arthurnagy.news.core.storage
+package me.arthurnagy.news.core.data.db
 
 import androidx.room.Delete
 import androidx.room.Insert
