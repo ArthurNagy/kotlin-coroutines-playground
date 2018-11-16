@@ -1,11 +1,18 @@
 package me.arthurnagy.news.core
 
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import kotlinx.coroutines.*
 import me.arthurnagy.news.core.data.Resource
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 val Any?.exhaustive get() = Unit
+
+inline fun <T> LiveData<T>.observeNonNull(lifecycleOwner: LifecycleOwner, crossinline observer: (T) -> Unit) {
+    this.observe(lifecycleOwner, Observer { it?.let(observer) })
+}
 
 suspend fun <T> CoroutineScope.suspendBlockResource(block: suspend (CoroutineScope.() -> T)): Resource<T> {
     return try {

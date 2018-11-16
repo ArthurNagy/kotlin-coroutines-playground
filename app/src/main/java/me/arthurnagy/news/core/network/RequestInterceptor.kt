@@ -1,12 +1,16 @@
 package me.arthurnagy.news.core.network
 
+import me.arthurnagy.news.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class RequestInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val request = chain.request()
+        val requestBuilder = request.newBuilder()
+            .addHeader("X-Api-Key", BuildConfig.AUTH_KEY)
+        return chain.proceed(requestBuilder.build())
     }
 
 }

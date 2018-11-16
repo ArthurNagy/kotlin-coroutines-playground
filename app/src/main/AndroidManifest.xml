@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="me.arthurnagy.news">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".App"
+        android:name=".NewsApp"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name="me.arthurnagy.news.MainActivity">
             <intent-filter>

@@ -1,4 +1,4 @@
-package me.arthurnagy.news.detail
+package me.arthurnagy.news.feature.detail
 
 import androidx.fragment.app.Fragment
 
