@@ -1,6 +1,6 @@
 package me.arthurnagy.news.core.data.source
 
-import me.arthurnagy.news.core.network.NewsApi
+import me.arthurnagy.news.core.api.NewsApi
 
 class SourceRepository(
     private val sourceDao: SourceDao,

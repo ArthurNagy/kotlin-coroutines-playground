@@ -1,8 +1,8 @@
 package me.arthurnagy.news.core.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import me.arthurnagy.news.core.network.NewsApi
-import me.arthurnagy.news.core.network.RequestInterceptor
+import me.arthurnagy.news.core.api.NewsApi
+import me.arthurnagy.news.core.api.RequestInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module

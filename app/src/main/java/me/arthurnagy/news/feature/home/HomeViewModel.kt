@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import me.arthurnagy.news.NewsViewModel
+import me.arthurnagy.news.base.NewsViewModel
 import me.arthurnagy.news.core.AppDispatchers
 import me.arthurnagy.news.core.data.Resource
 import me.arthurnagy.news.core.data.article.Article

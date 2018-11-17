@@ -1,10 +1,10 @@
-package me.arthurnagy.news.core.network
+package me.arthurnagy.news.core.api
 
 import kotlinx.coroutines.Deferred
+import me.arthurnagy.news.core.data.model.Category
+import me.arthurnagy.news.core.data.model.Country
+import me.arthurnagy.news.core.data.model.SortType
 import me.arthurnagy.news.core.data.source.Source
-import me.arthurnagy.news.core.model.Category
-import me.arthurnagy.news.core.model.Country
-import me.arthurnagy.news.core.model.SortType
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,7 +15,7 @@ interface NewsApi {
         @Query("country") country: String = Country.USA.value,
         @Query("category") category: String = Category.TECHNOLOGY.value,
         @Query("page") page: Int = 0,
-        @Query("pageSize") pageSize: Int = 40
+        @Query("pageSize") pageSize: Int = 20
     ): Deferred<ArticlesResponse>
 
     @GET("v2/everything")

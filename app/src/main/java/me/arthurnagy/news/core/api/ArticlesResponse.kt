@@ -1,4 +1,4 @@
-package me.arthurnagy.news.core.network
+package me.arthurnagy.news.core.api
 
 import me.arthurnagy.news.core.data.article.Article
 

@@ -14,9 +14,9 @@ import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import me.arthurnagy.news.HomeBinding
 import me.arthurnagy.news.R
-import me.arthurnagy.news.core.GlideApp
+import me.arthurnagy.news.base.GlideApp
+import me.arthurnagy.news.base.observeNonNull
 import me.arthurnagy.news.core.data.article.Article
-import me.arthurnagy.news.core.observeNonNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {

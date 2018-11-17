@@ -1,4 +1,4 @@
-package me.arthurnagy.news.core.model
+package me.arthurnagy.news.core.data.model
 
 enum class Country(val value: String) {
     HUNGARY("hu"),

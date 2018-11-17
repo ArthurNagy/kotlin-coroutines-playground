@@ -1,4 +1,4 @@
-package me.arthurnagy.news.core
+package me.arthurnagy.news.base
 
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule

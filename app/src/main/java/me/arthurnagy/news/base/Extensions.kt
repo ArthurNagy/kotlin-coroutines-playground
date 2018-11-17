@@ -1,11 +1,13 @@
-package me.arthurnagy.news.core
+package me.arthurnagy.news.base
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -52,6 +54,17 @@ suspend fun <T> Deferred<T>.awaitResource(): Resource<T> = try {
     Resource.Error(exception)
 }
 
+inline fun <T> dependentLiveData(vararg dependencies: LiveData<out Any>, defaultValue: T? = null, crossinline map: () -> T): LiveData<T> =
+    MediatorLiveData<T>().apply {
+        val observer = Observer<Any> {
+            value = map()
+        }
+        value = defaultValue
+        dependencies.forEach {
+            addSource(it, observer)
+        }
+    }
+
 @BindingAdapter(value = ["articleImage"])
 fun ImageView.setArticleImage(image: String?) {
     this.isVisible = !image.isNullOrEmpty()
@@ -78,3 +91,7 @@ fun TextView.setArticlePublishedAtValue(publishedAt: String) {
     text = resultFormatter.format(publishedDate)
 }
 
+@BindingAdapter("isVisible")
+fun View.isVisible(isVisible: Boolean) {
+    this.isVisible = isVisible
+}

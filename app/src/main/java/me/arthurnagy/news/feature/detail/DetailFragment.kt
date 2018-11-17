@@ -1,6 +1,7 @@
 package me.arthurnagy.news.feature.detail
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,11 @@ class DetailFragment : Fragment() {
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())
 
         binding.viewModel = viewModel
+        binding.content.movementMethod = LinkMovementMethod.getInstance()
+
+        binding.readMore.setOnClickListener {
+            openArticle(requireContext(), viewModel.article.value?.url)
+        }
 
         return binding.root
     }

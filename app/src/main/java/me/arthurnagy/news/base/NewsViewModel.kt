@@ -1,4 +1,4 @@
-package me.arthurnagy.news
+package me.arthurnagy.news.base
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

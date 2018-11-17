@@ -1,4 +1,4 @@
-package me.arthurnagy.news.core.model
+package me.arthurnagy.news.core.data.model
 
 enum class Category(val value: String) {
     BUSINESS("business"),

@@ -1,8 +1,8 @@
 package me.arthurnagy.news.core.data.article
 
-import me.arthurnagy.news.core.awaitResource
+import me.arthurnagy.news.base.awaitResource
+import me.arthurnagy.news.core.api.NewsApi
 import me.arthurnagy.news.core.data.Resource
-import me.arthurnagy.news.core.network.NewsApi
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 

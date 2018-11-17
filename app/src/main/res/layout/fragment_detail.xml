@@ -62,11 +62,72 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="@dimen/first_keyline">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.article.title}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Black Friday came early! Score three 3rd-gen Echo Dot smart speakers for $23 apiece" />
+
+                <TextView
+                    android:id="@+id/author"
+                    isVisible="@{viewModel.showAuthor}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:text="@{viewModel.article.author}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_content_padding"
+                    android:text="@{viewModel.article.source.name}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/author"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/first_keyline"
+                    android:autoLink="all"
+                    android:linksClickable="true"
+                    android:text="@{viewModel.articleContent}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/source"
+                    tools:text="@tools:sample/lorem" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/read_more"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fab_text_button_height"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/content_padding"
+            android:text="@string/read_more"
+            app:cornerRadius="@dimen/fab_text_button_radius"
+            app:icon="@drawable/ic_open_in_browser_24dp"
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -12,7 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import me.arthurnagy.news.ArticleItemBinding
 import me.arthurnagy.news.R
-import me.arthurnagy.news.core.GlideApp
+import me.arthurnagy.news.base.GlideApp
 import me.arthurnagy.news.core.data.article.Article
 
 typealias OnItemSelected = (Int) -> Unit
