@@ -3,6 +3,8 @@ package me.arthurnagy.news.core.data.article
 import me.arthurnagy.news.core.awaitResource
 import me.arthurnagy.news.core.data.Resource
 import me.arthurnagy.news.core.network.NewsApi
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class ArticleRepository(
     private val newsApi: NewsApi,
@@ -14,6 +16,16 @@ class ArticleRepository(
     suspend fun getArticles(): Resource<List<Article>> {
         val localArticles = articleDao.getAll()
         return if (localArticles.isNullOrEmpty()) fetchArticles() else Resource.Success(localArticles)
+    }
+
+    suspend fun getArticle(articleId: String): Resource<Article> = suspendCoroutine {
+        it.resume(
+            try {
+                Resource.Success(articleDao.getByTitle(articleId))
+            } catch (exception: Exception) {
+                Resource.Error(exception)
+            }
+        )
     }
 
     suspend fun fetchArticles(): Resource<List<Article>> {

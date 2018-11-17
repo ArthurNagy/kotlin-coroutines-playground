@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
@@ -17,7 +17,6 @@ import me.arthurnagy.news.R
 import me.arthurnagy.news.core.GlideApp
 import me.arthurnagy.news.core.data.article.Article
 import me.arthurnagy.news.core.observeNonNull
-import me.arthurnagy.news.feature.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -31,10 +30,13 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        NavigationUI.setupWithNavController(binding.toolbar, findNavController())
+
         val adapter = ArticlesAdapter()
         adapter.setOnItemSelectedListener {
-            val articleId = viewModel.articles.value?.get(it)?.title
-            findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundleOf(DetailFragment.ARTICLE_ID to articleId))
+            viewModel.articles.value?.get(it)?.title?.let { articleId ->
+                findNavController().navigate(HomeFragmentDirections.ActionHomeFragmentToDetailFragment(articleId))
+            }
         }
 
         binding.recycler.apply {

@@ -64,6 +64,13 @@ fun ImageView.setArticleImage(image: String?) {
     }
 }
 
+@BindingAdapter(value = ["imageUrl"])
+fun ImageView.imageUrl(image: String?) {
+    GlideApp.with(this)
+        .load(image)
+        .into(this)
+}
+
 @BindingAdapter(value = ["articlePublishedAt"])
 fun TextView.setArticlePublishedAtValue(publishedAt: String) {
     val publishedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).parse(publishedAt)

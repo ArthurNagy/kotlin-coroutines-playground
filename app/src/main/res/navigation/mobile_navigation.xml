@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="me.arthurnagy.news.feature.home.HomeFragment"
-        android:label="HomeFragment">
+        android:label="@string/headlines">
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -14,9 +14,9 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="me.arthurnagy.news.feature.detail.DetailFragment"
-        android:label="DetailFragment">
+        android:label=" ">
         <argument
-            android:name="id"
+            android:name="articleId"
             app:argType="string" />
     </fragment>
 </navigation>
