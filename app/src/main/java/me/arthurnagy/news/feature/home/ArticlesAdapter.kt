@@ -5,30 +5,55 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.ListPreloader
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.util.ViewPreloadSizeProvider
 import me.arthurnagy.news.ArticleItemBinding
+import me.arthurnagy.news.R
+import me.arthurnagy.news.core.GlideApp
 import me.arthurnagy.news.core.data.article.Article
 
 typealias OnItemSelected = (Int) -> Unit
 
-class ArticlesAdapter : ListAdapter<Article, ArticlesAdapter.ArticleViewHolder>(diffUtilCallback) {
+class ArticlesAdapter : ListAdapter<Article, ArticlesAdapter.ArticleViewHolder>(diffUtilCallback), ListPreloader.PreloadModelProvider<Article> {
+
+    val glideSizeProvider = ViewPreloadSizeProvider<Article>()
 
     private var onItemSelected: OnItemSelected? = null
+    private var recyclerView: RecyclerView? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val viewHolder = ArticleViewHolder.create(parent)
         viewHolder.setOnItemSelectedListener(onItemSelected)
+        glideSizeProvider.setView(viewHolder.binding.image)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.binding.article = getItem(position)
+    }
+
+    override fun getPreloadItems(position: Int): MutableList<Article> = mutableListOf<Article>().apply { getItem(position)?.let { add(it) } }
+
+    override fun getPreloadRequestBuilder(item: Article): RequestBuilder<*>? = recyclerView?.context?.let {
+        GlideApp.with(it)
+            .load(item.urlToImage)
+            .transforms(CenterCrop(), RoundedCorners(it.resources.getDimensionPixelSize(R.dimen.content_padding)))
+            .dontAnimate()
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
     }
 
     fun setOnItemSelectedListener(onItemSelected: OnItemSelected) {
         this.onItemSelected = onItemSelected
     }
 
-    class ArticleViewHolder private constructor(private val binding: ArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder private constructor(val binding: ArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun setOnItemSelectedListener(onItemSelected: OnItemSelected?) {
             onItemSelected?.let {
@@ -36,10 +61,6 @@ class ArticlesAdapter : ListAdapter<Article, ArticlesAdapter.ArticleViewHolder>(
                     onItemSelected(adapterPosition)
                 }
             }
-        }
-
-        fun bind(article: Article) {
-            binding.article = article
         }
 
         companion object {

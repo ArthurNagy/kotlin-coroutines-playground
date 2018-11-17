@@ -58,6 +58,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle"
 
     implementation "android.arch.work:work-runtime:$work"
+    implementation "android.arch.work:work-runtime-ktx:$work"
 //    implementation "android.arch.work:work-firebase:$work_version"
 
     implementation "androidx.room:room-runtime:$room"
@@ -70,6 +71,10 @@ dependencies {
 
 
     implementation "com.github.bumptech.glide:glide:$glide"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:$glide") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
     kapt "com.github.bumptech.glide:compiler:$glide"
 
     implementation "org.koin:koin-android:$koin"
