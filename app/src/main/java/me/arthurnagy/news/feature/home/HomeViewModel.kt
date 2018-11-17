@@ -17,7 +17,9 @@ class HomeViewModel(
 ) : NewsViewModel(dispatchers) {
 
     private val _articles = MutableLiveData<List<Article>>()
-    val articles: LiveData<List<Article>> = _articles
+    val articles: LiveData<List<Article>> get() = _articles
+    private val _refreshing = MutableLiveData<Boolean>()
+    val refreshing: LiveData<Boolean> get() = _refreshing
 
     init {
         launch {
@@ -36,9 +38,11 @@ class HomeViewModel(
 
     fun refreshArticles() {
         launch {
+            _refreshing.value = true
             val articlesResult = withContext(dispatchers.io) {
                 articleRepository.fetchArticles()
             }
+            _refreshing.value = false
             when (articlesResult) {
                 is Resource.Success -> _articles.value = articlesResult.data
                 is Resource.Error -> Log.d("HomeViewModel", "Handle error: ${articlesResult.exception}")

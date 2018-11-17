@@ -1,6 +1,7 @@
 package me.arthurnagy.news
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import me.arthurnagy.news.core.di.appModule
 import me.arthurnagy.news.core.di.dbModule
 import me.arthurnagy.news.core.di.networkModule
@@ -11,11 +12,11 @@ import org.koin.android.ext.android.startKoin
 
 class NewsApp : Application() {
 
-//    companion object {
-//        init {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
-//        }
-//    }
+    companion object {
+        init {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()

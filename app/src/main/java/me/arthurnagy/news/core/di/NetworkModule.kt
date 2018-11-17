@@ -20,7 +20,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("http://newsapi.org/")
+            .baseUrl("https://newsapi.org/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())

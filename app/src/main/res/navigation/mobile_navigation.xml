@@ -14,5 +14,9 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="me.arthurnagy.news.feature.detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment">
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

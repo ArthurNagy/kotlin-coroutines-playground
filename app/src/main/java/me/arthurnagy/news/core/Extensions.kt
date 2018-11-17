@@ -1,10 +1,19 @@
 package me.arthurnagy.news.core
 
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import kotlinx.coroutines.*
+import me.arthurnagy.news.R
 import me.arthurnagy.news.core.data.Resource
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -42,3 +51,23 @@ suspend fun <T> Deferred<T>.awaitResource(): Resource<T> = try {
 } catch (exception: Exception) {
     Resource.Error(exception)
 }
+
+@BindingAdapter(value = ["articleImage"])
+fun ImageView.setArticleImage(image: String?) {
+    this.isVisible = !image.isNullOrEmpty()
+    if (!image.isNullOrEmpty()) {
+        GlideApp.with(this)
+            .load(image)
+            .transforms(CenterCrop(), RoundedCorners(this.context.resources.getDimensionPixelSize(R.dimen.content_padding)))
+            .dontAnimate()
+            .into(this)
+    }
+}
+
+@BindingAdapter(value = ["articlePublishedAt"])
+fun TextView.setArticlePublishedAtValue(publishedAt: String) {
+    val publishedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).parse(publishedAt)
+    val resultFormatter = SimpleDateFormat("hh:mm dd.MM.yyyy", Locale.getDefault())
+    text = resultFormatter.format(publishedDate)
+}
+

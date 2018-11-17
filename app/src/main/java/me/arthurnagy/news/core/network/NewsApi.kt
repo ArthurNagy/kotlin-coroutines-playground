@@ -14,7 +14,8 @@ interface NewsApi {
     fun getHeadlines(
         @Query("country") country: String = Country.USA.value,
         @Query("category") category: String = Category.TECHNOLOGY.value,
-        @Query("page") page: Int = 0
+        @Query("page") page: Int = 0,
+        @Query("pageSize") pageSize: Int = 40
     ): Deferred<ArticlesResponse>
 
     @GET("v2/everything")
