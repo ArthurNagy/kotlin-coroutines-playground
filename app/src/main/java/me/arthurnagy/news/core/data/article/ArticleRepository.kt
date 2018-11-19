@@ -3,6 +3,8 @@ package me.arthurnagy.news.core.data.article
 import me.arthurnagy.news.base.awaitResource
 import me.arthurnagy.news.core.api.NewsApi
 import me.arthurnagy.news.core.data.Resource
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -15,7 +17,7 @@ class ArticleRepository(
 
     suspend fun getArticles(): Resource<List<Article>> {
         val localArticles = articleDao.getAll()
-        return if (localArticles.isNullOrEmpty()) fetchArticles() else Resource.Success(localArticles)
+        return if (localArticles.isNullOrEmpty()) fetchArticles() else Resource.Success(sortArticles(localArticles))
     }
 
     suspend fun getArticle(articleId: String): Resource<Article> = suspendCoroutine {
@@ -38,6 +40,10 @@ class ArticleRepository(
             }
             is Resource.Error -> remoteArticleResource
         }
+    }
+
+    private fun sortArticles(articles: List<Article>) = articles.sortedByDescending { article ->
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).parse(article.publishedAt)
     }
 
 }
